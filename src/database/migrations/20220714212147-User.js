@@ -2,32 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-   const userTable = queryInterface.createTable("Users", {
+   const userTable = queryInterface.createTable('Users', {
     id: {
-      allowNull: false,
-      autoIncrement: true,
+      type: Sequelize.INTEGER,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      autoIncrement: true,
     },
-    name: {
-      allowNull: false,
+    displayName: {
       type: Sequelize.STRING,
-    },
-    description: {
       allowNull: false,
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    image: {
       type: Sequelize.STRING,
     },
    });
-
-   return userTable;
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('Users');
   }
 };
