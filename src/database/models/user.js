@@ -6,6 +6,7 @@ const userAttributes = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
       },
       displayName: {
         type: Sequelize.STRING,
