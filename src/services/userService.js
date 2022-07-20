@@ -35,5 +35,14 @@ const user = {
     async getAll() {
         return models.User.findAll({ attributes: { exclude: ['password'] } });
     },
+
+    async getById(id) {
+        const userFind = await models.User.findByPk(id, { raw: true });
+        if (!userFind) {
+            return { status: 404, data: { message: 'User does not exist' } };
+        }
+        const { password, ...userData } = userFind;
+        return { status: 200, data: userData };
+    },
 };
 module.exports = user;
