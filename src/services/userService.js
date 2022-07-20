@@ -33,7 +33,7 @@ const user = {
     },
 
     async getAll() {
-        return models.User.findAll();
+        return models.User.findAll({ attributes: { exclude: ['password'] } });
     },
 };
 module.exports = user;
