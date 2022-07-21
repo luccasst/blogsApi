@@ -26,8 +26,9 @@ const user = {
         const registedEmail = await models.User.findOne({ where: { email: value.email } });
         if (registedEmail) return { status: 409, json: { message: 'User already registered' } };
 
-        await models.User.create(value);
-        const token = jwt.sign({ json: value.email }, process.env.JWT_SECRET);
+       const newUser = await models.User.create(value, { raw: true });
+       const { dataValue: { id } } = newUser;
+       const token = jwt.sign({ json: id }, process.env.JWT_SECRET);
 
         return { status: 201, json: { token } };
     },
